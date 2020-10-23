@@ -10,7 +10,9 @@ class	 DepartmentsController < ApplicationController
 		@department = Department.new
 	end
  
-
+	def show
+		@department = Department.find(params[:id])
+	end
  #todo
 
 
@@ -31,3 +33,6 @@ class	 DepartmentsController < ApplicationController
 		@department = Department.find(params[:id])
 		authorize @department || Department.new
 	end
+
+
+

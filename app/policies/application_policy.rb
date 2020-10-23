@@ -1,7 +1,12 @@
-class	UserPolicy < ApplicationPolicy
+class	ApplicationPolicy 
 	attr_reader :current_user, :model	
 
-	def index?
+	def initialize(current_user, model)
+		@current_user = current_user
+		@model = model		
+	end
+
+		def index?
 		@current_user.admin?
 	end
 
