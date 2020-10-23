@@ -1,5 +1,4 @@
-class	DepartmentPolicy < ApplicationPolicy 
-attr_reader :current_user, :model	
+class	TaskPolicy < ApplicationPolicy
 
 	def index?
 		
@@ -21,4 +20,4 @@ attr_reader :current_user, :model
 		@current_user.admin? && Department.where(users: nil)
 	end
 
-end	
+end

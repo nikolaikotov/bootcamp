@@ -14,6 +14,5 @@ class	UserPolicy < ApplicationPolicy
 	end
 
 	def destroy?
-		@current_user.admin? && Department.where(users: nil)
-	end
+		@current_user.admin?
 end

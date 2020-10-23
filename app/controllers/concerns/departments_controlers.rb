@@ -18,7 +18,8 @@ class	 DepartmentsController < ApplicationController
 
 	def update
 		@department = Department.find(params[:id])
-		#todo
+		@department.update_attributes department_params
+		#redirect_to department_path
 	end
 
 	def destroy
@@ -26,7 +27,8 @@ class	 DepartmentsController < ApplicationController
 		department.destroy
 		redirect_to user_path :notice => "Department deleted"
 	end
-	
+
+
 	private
 
 	def authorize_record
@@ -34,5 +36,8 @@ class	 DepartmentsController < ApplicationController
 		authorize @department || Department.new
 	end
 
-
+	def department_params
+		params.require(:department).permit(:title)
+	end
+	
 
