@@ -1,0 +1,32 @@
+<% if current_user %> 
+      
+      <%= link_to(destroy_user_session_path, {:class => "nav-link", :method => :delete}) do  %>
+      <span class="sidebar-normal"> Sign_out </span>
+      <% end %>
+
+       <%= link_to new_user_invitation_path, {:class => "nav-link"} do  %>
+       <span class='sidebar-normal'> Invite </span>
+       <% end %>
+
+      <%= link_to 'Edit Profile', edit_user_registration_path %>
+
+     <%= image_tag(current_user.avatar_thumbnail) %>
+
+     <%= link_to 'Users Profile', users_path %>
+
+     <%= link_to 'Departments', departments_path %>
+
+      <%= link_to 'Development Plan', development_plans_path %>
+      
+
+       <%= link_to 'flow step', flow_steps_path %>
+
+ <% end %>
+
+
+<section class="section pt3">
+	<p class="title is-5 border-bottom pb3 has-text-centered">Welcome <%= current_user.first_name %> 👋🏻</p>
+
+
+
+</section>

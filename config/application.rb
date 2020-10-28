@@ -33,3 +33,4 @@ module Bootcamp
     config.generators.system_tests = nil
   end
 end
+

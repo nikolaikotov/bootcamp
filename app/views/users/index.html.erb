@@ -1,3 +1,33 @@
+<h1>USERS INDEX</h1>
+
 <% @users.each do |user| %>
 <%= user.email%>
+<%=	user.first_name%>
+
+	<td>
+	<%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button') unless user == current_user %> 
+	
+</td>
+
+		<%= form_for(user) do |f| %>
+		<%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
+		<td>	
+		<button><%= f.submit 'Change Role' %></button>
+		</td>
+	<% end %>
+
+	<%= form_for(user) do |f| %>
+		<%= f.select(:level, User.levels.keys.map {|level| [level.titleize,level]}) %>
+		<td>	
+		<button><%= f.submit 'Change level' %></button>
+		</td>
+	<% end %>
+
+	<%= form_for(user) do |f| %>
+		<%= f.select(:department_id, Department.all.collect { |d| [d.title, d.id] }) %>
+		<td>	
+		<button><%= f.submit 'Change Department' %></button>
+		</td>
+	<% end %>
+
 <% end %>

@@ -2,6 +2,6 @@ class Task < ApplicationRecord
 
 	include SharedScope
 	
-	belongs_to :development_plan
+	belongs_to :flow_step
 
 end

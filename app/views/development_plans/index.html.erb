@@ -1,0 +1,8 @@
+<h1>INDEX DEVELOPMENT PLANS</h1>	
+
+<% #@development_plans.each do |development_plan| %>
+	<%= development_plan.title%>
+	<%= link_to "Open", development_plan_path(development_plan) %>
+	<%end%>
+
+<%= link_to("New development plan", new_development_plan_path) %>

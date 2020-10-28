@@ -1,0 +1,13 @@
+
+<%= @department.title %>
+<%= image_tag(@department.cover_image_thumbnail) %>
+
+<%= link_to "Edit", edit_department_path %>
+<%= link_to "Delete", department_path(@department), data: { method: :delete } %>
+
+<%= link_to "Back", departments_path %>
+
+####TODO 
+
+#add dep plans.all
+#add button add department plan

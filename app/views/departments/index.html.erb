@@ -1,0 +1,12 @@
+<h1>INDEX DEPARTMENTS</h1>	
+
+<% @departments.each do |department| %>
+	<%= department.title%>
+	<%= link_to "Open", department_path(department) %>
+	<%end%>
+
+
+<%= link_to("New department", new_department_path) %>
+
+
+

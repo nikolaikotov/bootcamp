@@ -13,6 +13,11 @@ class	UserPolicy < ApplicationPolicy
 		@current_user.admin?
 	end
 
+	def new?
+		@current_user.admin?
+	end
+
 	def destroy?
 		@current_user.admin?
+	end
 end
