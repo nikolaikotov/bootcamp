@@ -24,11 +24,6 @@ class FlowStepsController < ApplicationController
 		end
 	end
 
-
-	def edit
-		
-	end
-
 	def update
 		@flow_step.update_attributes(flow_step_params)
 		redirect_to department_development_plan_path(department, development_plan)
