@@ -11,7 +11,15 @@
 	<div>
 		<%= form.select(:level, Task.levels.keys.map {|level| [level.titleize,level]}) %>
 	</div>
+
+	 <div class="field">
+    <%= form.label :description %>
+    <%= form.rich_text_area :description %>
+  </div>
+	
 	<div>
   	<%= form.submit %>
   </div>
+
+ 
 <% end %>

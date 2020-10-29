@@ -1,7 +1,7 @@
 <div>
 	<%= @task.title %>
 </div>
-
+	<%= @task.description %>
 <div>
 	Flow Step 
 
@@ -14,3 +14,5 @@
 	<%= button_to "Delete", flow_step_task_path(flow_step, @task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
 </div>
+
+

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   include DeviseInvitable::Inviter
   attr_accessor :current_password
   belongs_to :department, optional: true
+  has_many :task_managements
+  has_many :tasks, through: :task_managements 
   # after_initialize :set_default_role, :if => :new_record?
   has_one_attached :avatar
 

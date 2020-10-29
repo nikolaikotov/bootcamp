@@ -2,16 +2,30 @@
 	<%= @development_plan.title %>
 </div>
 
-<div>
-	<div>
-		Flow Steps:
-	</div>
-	<%- @development_plan.flow_steps.each do |flow_step| %>
-		<div>
-			<%= link_to flow_step.title, development_plan_flow_step_path(@development_plan, flow_step), class: "btn btn-primary" %>
-		</div>
+<table style="width: 100%;">
+	<tr>
+    <th style="border: 1px solid #000000">Level</th>
+    <%- @development_plan.flow_steps.each do |flow_step| %>
+    	<th style="border: 1px solid #000000">
+    		<%= link_to flow_step.title, development_plan_flow_step_path(@development_plan, flow_step) %>
+    	</th>
+		<% end %>
+  </tr>
+  <%- Task.levels.keys.each do |task_level| %>
+  	<tr>
+  		<th style="border: 1px solid #000000"><%= task_level.titleize %></th>
+  		<%- @development_plan.flow_steps.each do |flow_step| %>
+  			<th style="border: 1px solid #000000">
+  				<%- flow_step.tasks.send(task_level).each do |task| %>
+						<div>
+							<%= link_to task.title, flow_step_task_path(flow_step, task) %>
+						</div>
+					<% end %>
+  			</th>
+			<% end %>
+  	</tr>
 	<% end %>
-</div>
+</table>
 
 <div>
 	Department
