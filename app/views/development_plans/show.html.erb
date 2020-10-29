@@ -1,9 +1,31 @@
+<div>
+	<%= @development_plan.title %>
+</div>
 
-<%= #@development_plan.title %>
-<%= link_to "Edit", edit_development_plan_path %>
-<%= link_to "Delete", development_plan_path(@development_plan), data: { method: :delete } %>
+<div>
+	<div>
+		Flow Steps:
+	</div>
+	<%- @development_plan.flow_steps.each do |flow_step| %>
+		<div>
+			<%= link_to flow_step.title, development_plan_flow_step_path(@development_plan, flow_step), class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>
 
-<%= link_to "Back", development_plans_path %>
+<div>
+	Department
+
+	<%=  link_to @development_plan.department.title, department_path(@development_plan.department), class: "btn btn-primary"  %>
+</div>
+
+<div>
+
+	<%= link_to "Edit", edit_department_development_plan_path, class: "btn btn-warning" %>
+	<%= button_to "Delete", department_development_plan_path(@development_plan.department, @development_plan), method: :delete, class: "btn btn-danger" %>
 
 
-     
+
+	<%= link_to "New flow step", new_development_plan_flow_step_path(development_plan_id: @development_plan.id), class: "btn btn-success" %>
+</div>
+    

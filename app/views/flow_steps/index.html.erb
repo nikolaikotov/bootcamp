@@ -1,8 +1,0 @@
-<h1>INDEX STEP FLOWS</h1>	
-
-<% #@flow_steps.each do |flow_step| %>
-	<%= flow_step.title%>
-		<%= link_to "Open", flow_step_path(flow_step) %>
-	<%end%>
-
-<%= link_to("New flow step", new_flow_step_path) %>

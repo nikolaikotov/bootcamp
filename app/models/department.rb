@@ -12,22 +12,22 @@ class Department < ApplicationRecord
 	def cover_image_thumbnail
 		if cover_image.attached?
 			cover_image.variant(resize: '150x150!').processed 
-		  else
+	  else
 		  "/default_profile.jpg"
 		end
 	end
 
 	private
-		def add_default_cover_image
-			unless cover_image.attached?
-		  	cover_image.attach(
-		  		io: File.open(
-		 				Rails.root.join(
-		 					'app','assets', 'images', 'default_profile.jpg'
-		                )
-		              ), filename: 'default_profile.jpg',
-		              content_type: 'image/jpg'
-		            )
+		
+	def add_default_cover_image
+		unless cover_image.attached?
+	  	cover_image.attach(
+	  		io: File.open(
+	 				Rails.root.join('app','assets', 'images', 'default_profile.jpg')
+        ), 
+	  		filename: 'default_profile.jpg',
+        content_type: 'image/jpg'
+      )
 		end
 	end
 

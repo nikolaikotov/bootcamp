@@ -1,13 +1,29 @@
+<div>
+	<%= @department.title %>
+</div>
 
-<%= @department.title %>
-<%= image_tag(@department.cover_image_thumbnail) %>
+<div>
+	<%= image_tag(@department.cover_image_thumbnail) %>
+</div>
 
-<%= link_to "Edit", edit_department_path %>
-<%= link_to "Delete", department_path(@department), data: { method: :delete } %>
+<div>
+	<div>
+		Development plans:
+	</div>
+	<%- @department.development_plans.each do |dev_plan| %>
+		<div>
+			<%= link_to dev_plan.title, department_development_plan_path(@department, dev_plan), class: "btn btn-primary" %>
+		</div>
+	<% end %>
+</div>
 
-<%= link_to "Back", departments_path %>
+<div>
 
-####TODO 
+	<%= link_to "Edit", edit_department_path, class: "btn btn-warning" %>
+	<%= link_to "Delete", department_path(@department), method: :delete, class: "btn btn-danger" %>
 
-#add dep plans.all
-#add button add department plan
+	<%= link_to "Back", departments_path, class: "btn btn-primary" %>
+
+	<%= link_to "New dev plan", new_department_development_plan_path(department_id: @department.id), class: "btn btn-success" %>
+</div>
+

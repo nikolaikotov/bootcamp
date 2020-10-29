@@ -1,42 +1,32 @@
 class DevelopmentPlansController < ApplicationController
-		before_action :find_depvelopment_plan, only: [:show, :edit, :update, :destroy]
-	def index
-		@development_plans = DevelopmentPlan.all
-	end
+	before_action :find_depvelopment_plan, only: [:show, :edit, :update, :destroy]
 
 	def new
 		@development_plan = DevelopmentPlan.new
+		@department = Department.find(params[:department_id]) if params[:department_id]
 	end
 
-	def show
-		#@development_plan = DevelopmentPlan.find(params[:id])
-	end
-
+	def show; end
 
 	def create
 		@development_plan = DevelopmentPlan.new(development_plan_params)
 		if @development_plan.save
-		 redirect_to development_plans_path
+		 redirect_to department_path(@development_plan.department)
 		else
 			render "new"
 		end
 	end
 
-
-	def edit
-		
-	end
+	def edit; end
 
 	def update
-		#@development_plan = DevelopmentPlan.find(params[:id])
 		@development_plan.update_attributes(development_plan_params)
-		 redirect_to development_plans_path
+		 redirect_to department_development_plan_path
 	end
 
 	def destroy
-		#development_plan = DevelopmentPlan.find(params[:id])
 		@development_plan.destroy
-		redirect_to user_path :notice => "Development plan deleted"
+		redirect_to department_path(department), :notice => "Development plan deleted"
 	end
 
 	private
@@ -45,8 +35,11 @@ class DevelopmentPlansController < ApplicationController
 		params.require(:development_plan).permit(:title, :department_id)		
 	end
 
+	def department
+		@department = Department.find(params[:department_id])
+	end
+
 	def find_depvelopment_plan
 		@development_plan = DevelopmentPlan.find(params[:id])
 	end
 end
-

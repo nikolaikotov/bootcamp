@@ -1,8 +1,14 @@
-<%= #form_with model: @flow_step do |form| %>
-  	Title
-  <%= form.text_field :title %>
-  	Development plan ID
- <%= form.collection_select :development_plan_id, DevelopmentPlan.order(:title), :id, :title %>
-  <%= form.submit %>
+<%= form_with model: @flow_step, url: [development_plan, @flow_step] do |form| %>
+	<div>
+		Title
+  	<%= form.text_field :title %>
+	</div>
+	<div>
+		Development plan
+		<%= form.hidden_field :development_plan_id, value: development_plan.id %>
+	  <%= development_plan.title%>		
+	</div>
+	<div>
+  	<%= form.submit %>
+  </div>
 <% end %>
-

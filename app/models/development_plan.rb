@@ -6,6 +6,4 @@ class DevelopmentPlan < ApplicationRecord
 
 	has_many :flow_steps
 
-	
-
 end

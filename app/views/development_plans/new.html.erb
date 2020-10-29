@@ -1,8 +1,14 @@
-<%= #form_with model: @development_plan do |form| %>
-  	Title
-  <%= form.text_field :title %>
-  	DepartmentID
- <%= form.collection_select :department_id, Department.order(:title), :id, :title %>
-  <%= form.submit %>
+<%= form_with model: @development_plan do |form| %>
+	<div>
+		Title
+  	<%= form.text_field :title %>
+	</div>
+	<div>
+		Department
+		<%= form.hidden_field :department_id, value: @department.id %>
+	  <%= @department.title%>		
+	</div>
+	<div>
+  	<%= form.submit %>
+  </div>
 <% end %>
-

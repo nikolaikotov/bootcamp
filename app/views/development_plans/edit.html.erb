@@ -1,4 +1,4 @@
-<%= #form_for :development_plan, url: development_plan_path(@development_plan), method: :put do |f| %>
+<%= form_for :development_plan, url: department_development_plan_path(@development_plan.department, @development_plan), method: :put do |f| %>
 
 <%= f.text_field (:title) %>
 <%= f.submit %>
