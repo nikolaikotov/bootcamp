@@ -1,7 +1,41 @@
 <div>
 	<%= @task.title %>
 </div>
+
+<div>
 	<%= @task.description %>
+</div>
+
+<div>
+	<div>
+		Comments:
+	</div>
+
+	<div>
+		<%- @task.comments.each do |comment| %>
+			<div>
+				<%= comment.body %>
+				<%= comment.user.first_name %>
+				<%= image_tag(comment.user.avatar) %>
+			</div>
+		<%end%>
+	</div>
+</div>
+
+<div>
+	<%= form_for Comment.new, url: task_comments_path(@task, Comment.new), method: :post do |f| %>
+		<%= f.hidden_field :commentable_type, value: "Task" %>
+		<%= f.hidden_field :user_id, value: current_user.id %>
+		
+		<div class="form_group">
+		<%= f.text_area :body, class: "form-control", placeholder: "Add a comment" %>
+		</div>
+		<%= f.submit class: "btn btn-primary" %>
+	<%end%>
+</div>
+
+
+
 <div>
 	Flow Step 
 
