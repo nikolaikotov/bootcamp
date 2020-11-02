@@ -1,5 +1,5 @@
 <h1>USERS INDEX</h1>
-
+<div class="container">
 <% @users.each do |user| %>
 <%= user.email%>
 <%=	user.first_name%>
@@ -12,22 +12,23 @@
 		<%= form_for(user) do |f| %>
 		<%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
 		<td>	
-		<button><%= f.submit 'Change Role' %></button>
+		<%= f.submit 'Change Role' %>
 		</td>
 	<% end %>
 
 	<%= form_for(user) do |f| %>
 		<%= f.select(:level, User.levels.keys.map {|level| [level.titleize,level]}) %>
 		<td>	
-		<button><%= f.submit 'Change level' %></button>
+		<%= f.submit 'Change level' %>
 		</td>
 	<% end %>
 
 	<%= form_for(user) do |f| %>
 		<%= f.select(:department_id, Department.all.collect { |d| [d.title, d.id] }) %>
 		<td>	
-		<button><%= f.submit 'Change Department' %></button>
+	<%= f.submit 'Change Department' %>
 		</td>
 	<% end %>
 
 <% end %>
+</div>
