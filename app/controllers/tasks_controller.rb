@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
 	before_action :find_task, only: [:show, :edit, :update, :destroy]
+	before_action :task_authorize, except: [:index]
 	helper_method :flow_step, :development_plan
 
 	def index
@@ -43,8 +44,11 @@ class TasksController < ApplicationController
 		@flow_step = FlowStep.find(params[:flow_step_id])
 	end
 
-
 	def development_plan
 		@development_plan = flow_step.development_plan
+	end
+
+	def task_authorize
+		authorize @task || Task.new
 	end
 end

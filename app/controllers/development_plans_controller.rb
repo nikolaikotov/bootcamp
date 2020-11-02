@@ -1,5 +1,6 @@
 class DevelopmentPlansController < ApplicationController
 	before_action :find_depvelopment_plan, only: [:show, :edit, :update, :destroy]
+	before_action :development_plan_authorize, except: [:index]
 
 	def new
 		@development_plan = DevelopmentPlan.new
@@ -41,5 +42,9 @@ class DevelopmentPlansController < ApplicationController
 
 	def find_depvelopment_plan
 		@development_plan = DevelopmentPlan.find(params[:id])
+	end
+
+	def development_plan_authorize
+		authorize @development_plan || DevelopmentPlan.new
 	end
 end

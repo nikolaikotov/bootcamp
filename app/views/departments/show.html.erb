@@ -1,29 +1,26 @@
-<div>
-	<%= @department.title %>
-</div>
-
-<div>
-	<%= image_tag(@department.cover_image_thumbnail) %>
-</div>
-
-<div>
+<div class="container">
 	<div>
-		Development plans:
+		<%= @department.title %>
 	</div>
-	<%- @department.development_plans.each do |dev_plan| %>
-		<div>
-			<%= link_to dev_plan.title, department_development_plan_path(@department, dev_plan), class: "btn btn-primary" %>
-		</div>
-	<% end %>
-</div>
-
-<div>
-
-	<%= link_to "Edit", edit_department_path, class: "btn btn-warning" %>
-	<%= button_to "Delete", department_path(@department), method: :delete, data: { confirm: 'Are you sure?' } , class: "btn btn-danger" %>
-
-	<%= link_to "Back", departments_path, class: "btn btn-primary" %>
-
-	<%= link_to "New dev plan", new_department_development_plan_path(department_id: @department.id), class: "btn btn-success" %>
+	<div>
+		<%= image_tag(@department.cover_image_thumbnail) %>
+	</div>
+	<div>
+		<%= link_to "Edit", edit_department_path, class: "todo_list_sub_title" %>
+		<%= button_to "Delete", department_path(@department), method: :delete, data: { confirm: 'Are you sure?' } , class: "todo_list_sub_title" %>
+		<%= link_to "Send PDF to email", department_export_as_pdf_path(@department, email: current_user.email), class: "todo_list_sub_title" %>
+		<%= link_to "Back", departments_path, class: "todo_list_sub_title" %>
+	</div>
+	<div>
+		<p class="todo_list_title">Development plans:</p>	
+	</div>
+		<%- @department.development_plans.each do |dev_plan| %>
+	<div>
+		<%= link_to dev_plan.title, department_development_plan_path(@department, dev_plan), class: "todo_list" %>
+			<% end %>
+	</div>
+	<div>
+		<%= link_to "New dev plan", new_department_development_plan_path(department_id: @department.id), class: "todo_list_sub_title" %>
+	</div>
 </div>
 

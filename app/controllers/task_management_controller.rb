@@ -1,3 +1,0 @@
-class TaskManagementController < ApplicationController
-
-end

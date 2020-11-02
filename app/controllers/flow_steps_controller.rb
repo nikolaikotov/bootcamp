@@ -1,5 +1,6 @@
 class FlowStepsController < ApplicationController
 	before_action :find_flow_step, only: [:show, :edit, :update, :destroy]
+	before_action :flow_step_authorize, except: [:index]
 	helper_method :development_plan, :department
 
 	def index
@@ -50,5 +51,9 @@ class FlowStepsController < ApplicationController
 
 	def find_flow_step
 		@flow_step = FlowStep.find(params[:id])
+	end
+
+	def flow_step_authorize
+		authorize @flow_step || FlowStep.new
 	end
 end	

@@ -11,7 +11,7 @@ class Department < ApplicationRecord
 
 	def cover_image_thumbnail
 		if cover_image.attached?
-			cover_image.variant(resize: '150x150!').processed 
+			cover_image.variant(resize: '64x64!').processed 
 	  else
 		  "/default_profile.jpg"
 		end

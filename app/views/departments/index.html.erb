@@ -1,14 +1,18 @@
-<h1>INDEX DEPARTMENTS</h1>	
-
-<% @departments.each do |department| %>
-	<div>
-		<%= link_to department.title, department_path(department), class: "btn btn-success" %>
+<%- if current_user.admin? %>
+	<div class="container">
+		<% @departments.each do |department| %>
+			<div>
+				<%= link_to department.title, department_path(department), class: "todo_list" %>
+			</div>
+		<%end%>
+		</br>
+		<div>
+			<%= link_to "New department", new_department_path, class: "todo_list_sub_title" %>	
+		</div>
 	</div>
+
+	<%- else current_user.member? %>
+		<div class="container">
+			<%= link_to current_user.department.title, department_path(current_user.department), class: "todo_list" %>
+		</div>
 <%end%>
-</br>
-<div>
-	<%= link_to "New department", new_department_path, class: "btn btn-primary" %>	
-</div>
-
-
-
