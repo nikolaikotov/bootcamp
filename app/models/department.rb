@@ -2,11 +2,8 @@ class Department < ApplicationRecord
 	
 	include SharedScope
 
-
 	has_many :users
-
 	has_many :development_plans
-
 	has_one_attached :cover_image
 
 	def cover_image_thumbnail
@@ -30,5 +27,4 @@ class Department < ApplicationRecord
       )
 		end
 	end
-
 end

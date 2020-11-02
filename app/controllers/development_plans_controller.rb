@@ -12,7 +12,7 @@ class DevelopmentPlansController < ApplicationController
 	def create
 		@development_plan = DevelopmentPlan.new(development_plan_params)
 		if @development_plan.save
-		 redirect_to department_path(@development_plan.department)
+			redirect_to department_path(@development_plan.department)
 		else
 			render "new"
 		end
@@ -22,12 +22,12 @@ class DevelopmentPlansController < ApplicationController
 
 	def update
 		@development_plan.update_attributes(development_plan_params)
-		 redirect_to department_development_plan_path
+			redirect_to department_development_plan_path
 	end
 
 	def destroy
 		@development_plan.destroy
-		redirect_to department_path(department), :notice => "Development plan deleted"
+			redirect_to department_path(department), :notice => "Development plan deleted"
 	end
 
 	private

@@ -11,15 +11,13 @@ class FlowStepsController < ApplicationController
 		@flow_step = FlowStep.new
 	end
 
-	def show
-		#@flow_step = FlowStep.find(params[:id])
-	end
+	def show;	end
 
 
 	def create
 		@flow_step = FlowStep.new(flow_step_params)
 		if @flow_step.save
-		 redirect_to department_development_plan_path(department, development_plan)
+			redirect_to department_development_plan_path(department, development_plan)
 		else
 			render "new"
 		end
@@ -27,12 +25,12 @@ class FlowStepsController < ApplicationController
 
 	def update
 		@flow_step.update_attributes(flow_step_params)
-		redirect_to department_development_plan_path(department, development_plan)
+			redirect_to department_development_plan_path(department, development_plan)
 	end
 
 	def destroy
 		@flow_step.destroy
-		redirect_to department_development_plan_path(department, development_plan), :notice => "Development plan deleted"
+			redirect_to department_development_plan_path(department, development_plan), :notice => "Development plan deleted"
 	end
 
 	private

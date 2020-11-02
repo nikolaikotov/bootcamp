@@ -1,24 +1,34 @@
 <% if current_user.admin? %> 
 <nav class="navbar">
-
-  <%= image_tag(current_user.avatar_thumbnail) %>
-  <%= link_to 'Edit Profile', edit_user_registration_path %>
-
-
-  <%= link_to 'Users Profile', users_path %>
-
-  <%= link_to 'Departments', departments_path %>    
-  <%= link_to new_user_invitation_path, {:class => "nav-link"} do  %>
-    <span class='sidebar-normal'> Invite </span>
-  <% end %>
-
-
-  <% else current_user.member? %>
-    <%= image_tag(current_user.avatar_thumbnail) %>
+  <div class="container">
+    <div>
+      <%= image_tag(current_user.avatar_thumbnail) %>
+      <%= current_user.first_name %>
+      <%= current_user.last_name %>
+      <p> level: <%= current_user.level%> </p>
+    </div>
     <%= link_to 'Edit Profile', edit_user_registration_path %>
-    <%= link_to 'Departments', departments_path %>  
-<% end %>
-    </ul> 
+
+
+    <%= link_to 'Users Profile', users_path %>
+
+    <%= link_to 'Departments', departments_path %>    
+    <%= link_to new_user_invitation_path, {:class => "nav-link"} do  %>
+      <span class='sidebar-normal'> Invite </span>
+    <% end %>
+
+
+    <% else current_user.member? %> 
+      <div>
+        <%= image_tag(current_user.avatar_thumbnail) %>
+        <%= current_user.first_name %>
+        <%= current_user.last_name %>
+        <p> level: <%= current_user.level%> </p>
+      </div>
+      <%= link_to 'Edit Profile', edit_user_registration_path %>
+      <%= link_to 'Departments', departments_path %>  
+  <% end %> 
+  </div>
 </nav>  
 
 <section class="section pt3">

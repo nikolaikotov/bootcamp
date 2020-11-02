@@ -2,13 +2,13 @@ class TaskManagementsController < ApplicationController
 	def create
 		@task_management = TaskManagement.new(task_management_params)
 		@task_management.save 
-		redirect_to flow_step_task_path(task.flow_step, task)
+			redirect_to flow_step_task_path(task.flow_step, task)
 	end
 
 	def update
 		task_management.done! if task_management.in_progres?
 		task_management.in_progres! if task_management.pending?
-		redirect_to flow_step_task_path(task.flow_step, task)
+			redirect_to flow_step_task_path(task.flow_step, task)
 	end
 
 	private
