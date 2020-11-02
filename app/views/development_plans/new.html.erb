@@ -1,4 +1,4 @@
-<%= form_with model: @development_plan do |form| %>
+<%= form_with model: @development_plan, url: [@department, @development_plan] do |form| %>
 	<div>
 		Title
   	<%= form.text_field :title %>

@@ -8,7 +8,7 @@
 	</div>
 	<%- @flow_step.tasks.each do |task| %>
 		<div>
-			<%= link_to task.title, flow_step_tasks_path(@flow_step, task), class: "btn btn-primary" %>
+			<%= link_to task.title, flow_step_task_path(@flow_step, task), class: "btn btn-primary" %>
 		</div>
 	<% end %>
 </div>
@@ -30,7 +30,7 @@
 <div>
 
 	<%= link_to "Edit", edit_development_plan_flow_step_path, class: "btn btn-warning" %>
-	<%= button_to "Delete", development_plan_flow_step_path(development_plan, @flow_step), method: :delete, class: "btn btn-danger" %>
+	<%= button_to "Delete", development_plan_flow_step_path(development_plan, @flow_step), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
 	<%= link_to "New task", new_flow_step_task_path(flow_step_id: @flow_step.id), class: "btn btn-success" %>
 </div>

@@ -1,6 +1,7 @@
 <%= form_for :task, url: flow_step_task_path(@task.flow_step, @task), method: :put do |form| %>
 
 	<%= form.text_field (:title) %>
+	<%= form.select(:level, Task.levels.keys.map {|level| [level.titleize,level]}) %>
 	<%= form.submit %>
 
 <%end%>

@@ -22,7 +22,7 @@
 <div>
 
 	<%= link_to "Edit", edit_department_development_plan_path, class: "btn btn-warning" %>
-	<%= button_to "Delete", department_development_plan_path(@development_plan.department, @development_plan), method: :delete, class: "btn btn-danger" %>
+	<%= button_to "Delete", department_development_plan_path(@development_plan.department, @development_plan), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
 
 
