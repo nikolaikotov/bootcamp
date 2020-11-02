@@ -1,8 +1,8 @@
-class	DepartmentPolicy < ApplicationPolicy 
+class FlowStepPolicy < ApplicationPolicy
 attr_reader :current_user, :model	
 
 	def index?
-		
+		super
 	end
 
 	def new?
@@ -10,15 +10,16 @@ attr_reader :current_user, :model
 	end
 
 	def show?
-		
+		super
 	end
 
 	def update?
-		
+		super
 	end
 
 	def destroy?
-		@current_user.admin? && Department.where(users: nil)
+		super
 	end
+
 
 end	

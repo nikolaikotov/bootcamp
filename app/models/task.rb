@@ -3,7 +3,11 @@ class Task < ApplicationRecord
 	include SharedScope
 	
 	belongs_to :flow_step
-
+	has_many :task_managements 
+	has_many :users, through: :task_managements 
+	has_rich_text :description
+	has_many :comments, as: :commentable 
+	
   enum level: {
     trainee: 0,
  	  junior: 1,

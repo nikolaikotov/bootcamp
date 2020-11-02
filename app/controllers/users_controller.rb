@@ -45,6 +45,6 @@ class UsersController < ApplicationController
 	end
 
 		def secure_params
-			params.require(:user).permit(:role, :level)			
+			params.require(:user).permit(:role, :level, :department_id)			
 		end
 end

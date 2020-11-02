@@ -2,6 +2,12 @@
 
 	<%= form.text_field (:title) %>
 	<%= form.select(:level, Task.levels.keys.map {|level| [level.titleize,level]}) %>
+	
+	 <div class="field">
+    <%= form.label :description %>
+    <%= form.rich_text_area :description %>
+  </div>
+  
 	<%= form.submit %>
 
 <%end%>

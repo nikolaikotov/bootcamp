@@ -1,0 +1,19 @@
+<div>
+	Department
+	<%= department.title %>
+</div>
+
+<div>
+	<%#= image_tag(department.cover_image_thumbnail) %>
+</div>
+
+<div>
+	<div>
+		Development plans:
+	</div>
+	<%- department.development_plans.each do |dev_plan| %>
+		<div>
+			<%= dev_plan.title %>
+		</div>
+	<% end %>
+</div>

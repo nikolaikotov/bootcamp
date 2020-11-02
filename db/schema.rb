@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_221802) do
+ActiveRecord::Schema.define(version: 2020_10_30_085441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -36,6 +46,18 @@ ActiveRecord::Schema.define(version: 2020_10_28_221802) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.bigint "user_id"
+    t.text "body", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "departments", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
@@ -56,6 +78,16 @@ ActiveRecord::Schema.define(version: 2020_10_28_221802) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "development_plan_id", null: false
     t.index ["development_plan_id"], name: "index_flow_steps_on_development_plan_id"
+  end
+
+  create_table "task_managements", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "user_id"
+    t.integer "state", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_task_managements_on_task_id"
+    t.index ["user_id"], name: "index_task_managements_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -98,8 +130,11 @@ ActiveRecord::Schema.define(version: 2020_10_28_221802) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "users"
   add_foreign_key "development_plans", "departments"
   add_foreign_key "flow_steps", "development_plans"
+  add_foreign_key "task_managements", "tasks"
+  add_foreign_key "task_managements", "users"
   add_foreign_key "tasks", "flow_steps"
   add_foreign_key "users", "departments"
 end

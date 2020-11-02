@@ -1,7 +1,8 @@
 class	 DepartmentsController < ApplicationController
-
 	# before_action :authorize_record, except: [:index, ]
 	before_action :find_department, only: [:show, :edit, :update, :destroy]
+	before_action :department_authorize, except: [:index]
+
 	def index
 		@departments = Department.all		
 	end
@@ -42,12 +43,13 @@ class	 DepartmentsController < ApplicationController
 		redirect_to departments_path :notice => "Department deleted"
 	end
 
-	private
+	def export_as_pdf
+		ExportMailer.send_department_data_as_pdf(params[:email], Department.find(params[:department_id])).deliver_now
 
-	# def authorize_record
-	# 	@department = Department.find(params[:id])
-	# 	authorize @department || Department.new
-	# end
+		redirect_to department_path(params[:department_id])
+	end
+
+	private
 
 	def department_params
 		params.require(:department).permit(:title, :cover_image)
@@ -56,6 +58,8 @@ class	 DepartmentsController < ApplicationController
 	def find_department 
 		@department = Department.find(params[:id])
 	end
-end
-	
 
+	def department_authorize
+		authorize @department || Department.new
+	end
+end

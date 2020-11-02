@@ -10,7 +10,10 @@ class User < ApplicationRecord
   include SharedScope
   include DeviseInvitable::Inviter
   attr_accessor :current_password
-  belongs_to :department, optional: true
+  belongs_to :department
+  has_many :task_managements
+  has_many :tasks, through: :task_managements 
+  has_many :comments
   # after_initialize :set_default_role, :if => :new_record?
   has_one_attached :avatar
 
@@ -26,36 +29,27 @@ class User < ApplicationRecord
        	member: 0,
        	admin: 1,
        }
-      
 
-       # def set_default_role
-       # 	self.role ||= :user
-       # end
+    def avatar_thumbnail
+      if avatar.attached?
+      avatar.variant(resize: '32x32!').processed 
+      else
+      "/default_profile.jpg"
+      end
+    end
 
-       def avatar_thumbnail
-        if avatar.attached?
-        avatar.variant(resize: '150x150!').processed 
-        else
-          "/default_profile.jpg"
+    private
+      def add_default_avatar
+      unless avatar.attached?
+        avatar.attach(
+          io: File.open(
+            Rails.root.join(
+              'app','assets', 'images', 'default_profile.jpg'
+              )
+            ), filename: 'default_profile.jpg',
+            content_type: 'image/jpg'
+          )
         end
-       end
+     end
 
-       private
-       def add_default_avatar
-        unless avatar.attached?
-          avatar.attach(
-            io: File.open(
-              Rails.root.join(
-                'app','assets', 'images', 'default_profile.jpg'
-                )
-              ), filename: 'default_profile.jpg',
-              content_type: 'image/jpg'
-            )
-          end
-        end
-
-       #user.avatar.attach(io: File.open("/path/to/face.jpg"), filename: "face.jpg", content_type: "image/jpg")
-
-
-     
 end

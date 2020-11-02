@@ -1,6 +1,42 @@
+<h1>TASKS SHOW</h1>	
+
 <div>
 	<%= @task.title %>
 </div>
+
+<div>
+	<%= @task.description %>
+</div>
+
+<div>
+	<div>
+		Comments:
+	</div>
+
+	<div>
+		<%- @task.comments.each do |comment| %>
+			<div>
+				<%= comment.body %>
+				<%= comment.user.first_name %>
+				<%= image_tag(comment.user.avatar) %>
+			</div>
+		<%end%>
+	</div>
+</div>
+
+<div>
+	<%= form_for Comment.new, url: task_comments_path(@task, Comment.new), method: :post do |f| %>
+		<%= f.hidden_field :commentable_type, value: "Task" %>
+		<%= f.hidden_field :user_id, value: current_user.id %>
+		
+		<div class="form_group">
+		<%= f.text_area :body, class: "form-control", placeholder: "Add a comment" %>
+		</div>
+		<%= f.submit class: "btn btn-primary" %>
+	<%end%>
+</div>
+
+
 
 <div>
 	Flow Step 
@@ -13,4 +49,20 @@
 	<%= link_to "Edit", edit_flow_step_task_path, class: "btn btn-warning" %>
 	<%= button_to "Delete", flow_step_task_path(flow_step, @task), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
 
+	<%- task_management = @task.task_managements.by_user(current_user.id).first %>
+	<%- if task_management %>
+		<%- if task_management&.pending? %>
+			<%= button_to "START", task_task_management_path(@task, task_management), method: :patch, class: "btn btn-primary"%>
+		<%- elsif task_management&.in_progres?%>
+			<%= button_to "FINISH", task_task_management_path(@task, task_management), method: :patch, class: "btn btn-primary"%>
+		<%- elsif task_management&.done? %>
+			<%= "task\'s state is done" %>
+		<%end%>
+	<% else %>
+	<%= button_to "add task to my plan", task_task_managements_path(@task, user_id: current_user.id), method: :post %>  
+	<% end %>		
+
+
 </div>
+
+

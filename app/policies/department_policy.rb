@@ -1,8 +1,8 @@
-class DevelopmentPlanPolicy < ApplicationPolicy
+class	DepartmentPolicy < ApplicationPolicy 
 attr_reader :current_user, :model	
 
 	def index?
-		super
+		
 	end
 
 	def new?
@@ -18,8 +18,10 @@ attr_reader :current_user, :model
 	end
 
 	def destroy?
-		super
+		@current_user.admin? && @model.users.empty?
 	end
 
-
+	def export_as_pdf?
+		true
+	end
 end	
