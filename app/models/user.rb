@@ -4,17 +4,14 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-        # enum level: %i[trainee junior middle senior]
-         #enum level: [:trainee, :junior, :middle, :senior]
-        
   include SharedScope
   include DeviseInvitable::Inviter
   attr_accessor :current_password
+
   belongs_to :department
   has_many :task_managements
   has_many :tasks, through: :task_managements 
   has_many :comments
-  # after_initialize :set_default_role, :if => :new_record?
   has_one_attached :avatar
 
 
@@ -33,23 +30,22 @@ class User < ApplicationRecord
     def avatar_thumbnail
       if avatar.attached?
       avatar.variant(resize: '32x32!').processed 
-      else
+        else
       "/default_profile.jpg"
       end
     end
 
     private
       def add_default_avatar
-      unless avatar.attached?
-        avatar.attach(
-          io: File.open(
-            Rails.root.join(
-              'app','assets', 'images', 'default_profile.jpg'
-              )
-            ), filename: 'default_profile.jpg',
-            content_type: 'image/jpg'
-          )
+        unless avatar.attached?
+          avatar.attach(
+            io: File.open(
+              Rails.root.join(
+                'app','assets', 'images', 'default_profile.jpg'
+                )
+              ), filename: 'default_profile.jpg',
+              content_type: 'image/jpg'
+            )
         end
-     end
-
+      end
 end

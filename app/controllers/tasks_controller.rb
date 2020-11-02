@@ -14,7 +14,7 @@ class TasksController < ApplicationController
 	def create
 		@task = Task.new(task_params)
 		if @task.save
-		 redirect_to development_plan_flow_step_path(development_plan, flow_step)
+			redirect_to development_plan_flow_step_path(development_plan, flow_step)
 		else
 			render "new"
 		end
@@ -22,12 +22,12 @@ class TasksController < ApplicationController
 
 	def update
 		@task.update_attributes(task_params)
-		redirect_to development_plan_flow_step_path(development_plan, flow_step)
+			redirect_to development_plan_flow_step_path(development_plan, flow_step)
 	end
 
 	def destroy
 		@task.destroy
-		redirect_to user_path :notice => "Task deleted"
+			redirect_to user_path :notice => "Task deleted"
 	end
 
 	private 

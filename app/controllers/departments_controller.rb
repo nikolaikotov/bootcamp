@@ -18,7 +18,7 @@ class	 DepartmentsController < ApplicationController
 	def create
 		@department = Department.new(department_params)
 		if @department.save
-		 redirect_to departments_path
+			redirect_to departments_path
 		else
 			render "new"
 		end
@@ -29,7 +29,6 @@ class	 DepartmentsController < ApplicationController
 	end
 
 	def update
-		#@department = Department.find(params[:id])
 		if @department.update_attributes(department_params)
 			 redirect_to department_path
 		else
@@ -45,7 +44,6 @@ class	 DepartmentsController < ApplicationController
 
 	def export_as_pdf
 		ExportMailer.send_department_data_as_pdf(params[:email], Department.find(params[:department_id])).deliver_now
-
 		redirect_to department_path(params[:department_id])
 	end
 
