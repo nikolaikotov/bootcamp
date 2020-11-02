@@ -27,6 +27,7 @@ import '../stylesheets/application.scss'
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require_directory
 
 require("trix")
 require("@rails/actiontext")
