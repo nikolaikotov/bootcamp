@@ -1,0 +1,17 @@
+<div>
+	<%= @task.title %>
+</div>
+
+<div>
+	Flow Step 
+
+	<%=  link_to flow_step.title, development_plan_flow_step_path(development_plan, flow_step), class: "btn btn-primary"  %>
+</div>
+
+<div>
+
+	<%= link_to "Edit", edit_flow_step_task_path, class: "btn btn-warning" %>
+	<%= button_to "Delete", flow_step_task_path(@flow_step.development_plan, @task), method: :delete, class: "btn btn-danger" %>
+
+	<%= link_to "New task", new_flow_step_task_path(flow_step_id: @flow_step.id), class: "btn btn-success" %>
+</div>

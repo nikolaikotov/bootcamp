@@ -1,0 +1,17 @@
+<%= form_with model: @task, url: [flow_step, @task] do |form| %>
+	<div>
+		Title
+  	<%= form.text_field :title %>
+	</div>
+	<div>
+		Flow Step
+		<%= form.hidden_field :flow_step_id, value: flow_step.id %>
+	  <%= flow_step.title%>		
+	</div>
+	<div>
+		<%= form.select(:level, Task.levels.keys.map {|level| [level.titleize,level]}) %>
+	</div>
+	<div>
+  	<%= form.submit %>
+  </div>
+<% end %>

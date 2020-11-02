@@ -18,7 +18,7 @@ attr_reader :current_user, :model
 	end
 
 	def destroy?
-		@current_user.admin? && Department.where(users: nil)
+		super
 	end
 
 

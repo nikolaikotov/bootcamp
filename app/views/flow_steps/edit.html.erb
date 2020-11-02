@@ -1,8 +1,6 @@
+<%= form_for :flow_step, url: development_plan_flow_step_path(@flow_step.development_plan, @flow_step), method: :put do |form| %>
 
-<%=# form_for :flow_step, url: { id: :development_plan_id}, method: :put do |f| %>
+	<%= form.text_field (:title) %>
+	<%= form.submit %>
 
-<%= #f.text_field (:title) %>
-<%= #f.submit %>
-
-<%#end%>
-
+<%end%>
